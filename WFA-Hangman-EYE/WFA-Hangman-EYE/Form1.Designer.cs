@@ -68,6 +68,7 @@
             this.buttonNewGame.TabIndex = 2;
             this.buttonNewGame.Text = "Start a New Game";
             this.buttonNewGame.UseVisualStyleBackColor = true;
+            this.buttonNewGame.Click += new System.EventHandler(this.buttonNewGame_Click);
             // 
             // textBoxGuess
             // 
@@ -119,6 +120,7 @@
             // 
             // richTextBoxGuessedLetters
             // 
+            this.richTextBoxGuessedLetters.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxGuessedLetters.Location = new System.Drawing.Point(204, 144);
             this.richTextBoxGuessedLetters.Name = "richTextBoxGuessedLetters";
             this.richTextBoxGuessedLetters.Size = new System.Drawing.Size(100, 96);
