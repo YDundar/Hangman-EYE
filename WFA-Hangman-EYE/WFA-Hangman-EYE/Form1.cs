@@ -31,15 +31,16 @@ namespace WFA_Hangman_EYE
                     if (!richTextBoxGuessedLetters.Text.Contains(letter.ToString()))
                         richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, letter + " ");
 
+                int index = 0;
                 foreach (char letter in word)   //Make visible the guessed letters.
                 {
-                    if (richTextBoxGuessedLetters.Text.Contains(letter))
+                    if (richTextBoxGuessedLetters.Text.Contains(letter)) //User guessed that letter.
                     {
-                        int index = word.IndexOf(letter);
                         char[] buffer = labelWord.Text.ToCharArray();
                         buffer[index * 2] = word[index];
                         labelWord.Text = new string(buffer);
                     }
+                    index++;
                 }
 
                 textBoxGuess.ResetText(); //Empty the guess text box
