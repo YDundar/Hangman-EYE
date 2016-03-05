@@ -5,13 +5,19 @@ namespace WFA_Hangman_EYE
 {
     public partial class Form1 : Form
     {
-        string word = "Computer";
+        string word;
 
         public Form1()
         {
             InitializeComponent();
 
-            labelWord.Text = "_ _ _ _ _ _ _ _";
+            word = WordPool.getRandomWord();
+
+            labelWord.Text = "";
+
+            foreach (char letter in word)
+                labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
+
             labelWord.Font = new System.Drawing.Font(labelWord.Font.Name, 16f);
         }
 
@@ -45,7 +51,11 @@ namespace WFA_Hangman_EYE
             richTextBoxGuessedLetters.ResetText();
             richTextBoxGuessedWords.ResetText();
             textBoxGuess.ResetText();
-            labelWord.Text = "_ _ _ _ _ _ _ _";
+            word = WordPool.getRandomWord();
+            labelWord.ResetText();
+            foreach (char letter in word)
+                labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
+
         }
     }
 }

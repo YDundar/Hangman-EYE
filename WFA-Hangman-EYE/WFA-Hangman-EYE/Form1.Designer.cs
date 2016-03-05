@@ -91,6 +91,7 @@
             // 
             // richTextBoxGuessedWords
             // 
+            this.richTextBoxGuessedWords.Enabled = false;
             this.richTextBoxGuessedWords.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxGuessedWords.Location = new System.Drawing.Point(204, 28);
             this.richTextBoxGuessedWords.Name = "richTextBoxGuessedWords";
@@ -120,6 +121,7 @@
             // 
             // richTextBoxGuessedLetters
             // 
+            this.richTextBoxGuessedLetters.Enabled = false;
             this.richTextBoxGuessedLetters.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxGuessedLetters.Location = new System.Drawing.Point(204, 144);
             this.richTextBoxGuessedLetters.Name = "richTextBoxGuessedLetters";
