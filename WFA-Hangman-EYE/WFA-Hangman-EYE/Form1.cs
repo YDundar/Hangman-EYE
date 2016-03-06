@@ -19,6 +19,7 @@ namespace WFA_Hangman_EYE
                 labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
 
             labelWord.Font = new System.Drawing.Font(labelWord.Font.Name, 16f);
+            textBoxGuess.MaxLength = word.Length;
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -53,6 +54,7 @@ namespace WFA_Hangman_EYE
             richTextBoxGuessedWords.ResetText();
             textBoxGuess.ResetText();
             word = WordPool.getRandomWord();
+            textBoxGuess.MaxLength = word.Length;
             labelWord.ResetText();
             foreach (char letter in word)
                 labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");

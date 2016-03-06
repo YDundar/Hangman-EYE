@@ -3,14 +3,18 @@ namespace WFA_Hangman_EYE
 {
     static class WordPool
     {
+        /// <summary>
+        /// Return a random word from the Word Pool.
+        /// </summary>
+        /// <returns></returns>
         public static string getRandomWord()
         {
             Random rnd = new Random();
             return words[rnd.Next(words.Length)];
-
-            string[] asd = { "aasd", "asd" };
         }
-
+        /// <summary>
+        /// Word Pool.
+        /// </summary>
         private static string[] words ={
             "people",
             "history",
