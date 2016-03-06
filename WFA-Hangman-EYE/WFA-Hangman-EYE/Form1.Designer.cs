@@ -43,7 +43,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(310, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(362, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 220);
             this.pictureBox1.TabIndex = 0;
@@ -93,7 +93,7 @@
             // 
             this.richTextBoxGuessedWords.Enabled = false;
             this.richTextBoxGuessedWords.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxGuessedWords.Location = new System.Drawing.Point(204, 28);
+            this.richTextBoxGuessedWords.Location = new System.Drawing.Point(256, 28);
             this.richTextBoxGuessedWords.Name = "richTextBoxGuessedWords";
             this.richTextBoxGuessedWords.Size = new System.Drawing.Size(100, 89);
             this.richTextBoxGuessedWords.TabIndex = 5;
@@ -103,7 +103,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(201, 8);
+            this.label2.Location = new System.Drawing.Point(253, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(204, 124);
+            this.label3.Location = new System.Drawing.Point(250, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 17);
             this.label3.TabIndex = 7;
@@ -123,7 +123,7 @@
             // 
             this.richTextBoxGuessedLetters.Enabled = false;
             this.richTextBoxGuessedLetters.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxGuessedLetters.Location = new System.Drawing.Point(204, 144);
+            this.richTextBoxGuessedLetters.Location = new System.Drawing.Point(253, 144);
             this.richTextBoxGuessedLetters.Name = "richTextBoxGuessedLetters";
             this.richTextBoxGuessedLetters.Size = new System.Drawing.Size(100, 96);
             this.richTextBoxGuessedLetters.TabIndex = 8;
@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 326);
+            this.ClientSize = new System.Drawing.Size(474, 326);
             this.Controls.Add(this.richTextBoxGuessedLetters);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

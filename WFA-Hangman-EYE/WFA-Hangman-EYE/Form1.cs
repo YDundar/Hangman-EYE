@@ -1,11 +1,23 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-
+using System.Drawing;
 namespace WFA_Hangman_EYE
 {
     public partial class Form1 : Form
     {
         string word;
+        Image[] hangImg= {
+            WFA_Hangman_EYE.Properties.Resources.hangman_0,
+            WFA_Hangman_EYE.Properties.Resources.hangman_1,
+            WFA_Hangman_EYE.Properties.Resources.hangman_2 ,
+            WFA_Hangman_EYE.Properties.Resources.hangman_3 ,
+            WFA_Hangman_EYE.Properties.Resources.hangman_4 ,
+            WFA_Hangman_EYE.Properties.Resources.hangman_5 ,
+            WFA_Hangman_EYE.Properties.Resources.hangman_6 ,
+            WFA_Hangman_EYE.Properties.Resources.hangman_7 ,
+            WFA_Hangman_EYE.Properties.Resources.hangman_8
+        };
+        int picIndex = 0;
 
         public Form1()
         {
@@ -24,15 +36,19 @@ namespace WFA_Hangman_EYE
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !richTextBoxGuessedWords.Text.Contains(textBoxGuess.Text) && !richTextBoxGuessedWords.Text.Contains(textBoxGuess.Text))
+            
+            if (e.KeyCode == Keys.Enter && !richTextBoxGuessedWords.Text.Contains(textBoxGuess.Text)/* && !richTextBoxGuessedWords.Text.Contains(textBoxGuess.Text)*/)
             {
                 richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n"); //Guessed word box
 
                 foreach (char letter in textBoxGuess.Text)  //Guessed letter box
                     if (!richTextBoxGuessedLetters.Text.Contains(letter.ToString()))
-                        richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, letter + " ");
+                        richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, letter + " ");                   
+                        
 
                 int index = 0;
+                bool doesExists = false;
+
                 foreach (char letter in word)   //Make visible the guessed letters.
                 {
                     if (richTextBoxGuessedLetters.Text.Contains(letter)) //User guessed that letter.
@@ -40,10 +56,16 @@ namespace WFA_Hangman_EYE
                         char[] buffer = labelWord.Text.ToCharArray();
                         buffer[index * 2] = word[index];
                         labelWord.Text = new string(buffer);
+                        doesExists = true;
                     }
                     index++;
                 }
 
+                if (doesExists == false)
+                {
+                    picIndex++;
+                    pictureBox1.Image = hangImg[picIndex];
+                }
                 textBoxGuess.ResetText(); //Empty the guess text box
             }
         }
@@ -56,6 +78,8 @@ namespace WFA_Hangman_EYE
             word = WordPool.getRandomWord();
             textBoxGuess.MaxLength = word.Length;
             labelWord.ResetText();
+            picIndex = 0;
+            pictureBox1.Image = hangImg[picIndex];
             foreach (char letter in word)
                 labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
 
