@@ -17,6 +17,7 @@ namespace WFA_Hangman_EYE
             WFA_Hangman_EYE.Properties.Resources.hangman_7 ,
             WFA_Hangman_EYE.Properties.Resources.hangman_8
         };
+
         int picIndex = 0;
 
         public Form1()
@@ -24,7 +25,7 @@ namespace WFA_Hangman_EYE
             InitializeComponent();
 
             word = WordPool.getRandomWord();
-
+            
             labelWord.Text = "";
 
             foreach (char letter in word)
@@ -40,7 +41,7 @@ namespace WFA_Hangman_EYE
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Enter && !richTextBoxGuessedLetters.Text.Contains(textBoxGuess.Text))
+            if (e.KeyCode == Keys.Enter && !isEnteredWord(textBoxGuess.Text))
             {
                 richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n"); //Guessed word box
 
@@ -50,7 +51,6 @@ namespace WFA_Hangman_EYE
 
 
                 int index = 0;
-                int numOfLettersFound = 0;
 
                 if (!word.Contains(textBoxGuess.Text)) //If the word does not contain the guess word...
                 {
@@ -61,12 +61,11 @@ namespace WFA_Hangman_EYE
                 {
                     foreach (char letter in word)   //Make visible the guessed letters.
                     {
-                        if (richTextBoxGuessedLetters.Text.Contains(letter)) //User guessed that letter.
+                        if (textBoxGuess.Text.Contains(letter)) //User guessed that letter.
                         {
                             char[] buffer = labelWord.Text.ToCharArray();
                             buffer[index * 2] = word[index];
                             labelWord.Text = new string(buffer);
-                            numOfLettersFound++;
                         }
                         index++;
                     }
@@ -78,20 +77,31 @@ namespace WFA_Hangman_EYE
                     textBoxGuess.Enabled = false;
                     textBoxGuess.BackColor = Color.Red;
                     textBoxGuess.ForeColor = Color.Red;
+
+                    string spacedWord = string.Join(" ", word.ToCharArray());
+                    labelShowOnLost.Text = spacedWord;
                 }
-                if (numOfLettersFound == word.Length) //User found all the lettters, won
+                if (!labelWord.Text.Contains('_')) //User found all the lettters, won
                 {
                     textBoxGuess.Enabled = false;
                     textBoxGuess.BackColor = Color.GreenYellow;
                     textBoxGuess.ForeColor = Color.GreenYellow;
                 }
 
-
-
-
-
                 textBoxGuess.ResetText(); //Empty the guess text box
             }
+        }
+
+        private bool isEnteredWord(string _guessWord)
+        {
+            string[] guessedWords = richTextBoxGuessedWords.Text.Split('\n');
+
+            foreach (string item in guessedWords)
+                if (item == _guessWord)
+                    return true;
+
+
+            return false;
         }
 
         private void buttonNewGame_Click(object sender, System.EventArgs e) //Reset the controls.
@@ -107,7 +117,7 @@ namespace WFA_Hangman_EYE
             foreach (char letter in word)
                 labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
 
-
+            labelShowOnLost.Text = " ";
             textBoxGuess.Enabled = true;
             textBoxGuess.BackColor = SystemColors.Control;
             textBoxGuess.ForeColor = SystemColors.ControlText;
