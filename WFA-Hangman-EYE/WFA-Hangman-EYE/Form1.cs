@@ -40,7 +40,7 @@ namespace WFA_Hangman_EYE
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Enter && !richTextBoxGuessedWords.Text.Contains(textBoxGuess.Text))
+            if (e.KeyCode == Keys.Enter && !richTextBoxGuessedLetters.Text.Contains(textBoxGuess.Text))
             {
                 richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n"); //Guessed word box
 
@@ -51,26 +51,42 @@ namespace WFA_Hangman_EYE
 
                 int index = 0;
                 int numOfLettersFound = 0;
-                foreach (char letter in word)   //Make visible the guessed letters.
-                {
-                    if (richTextBoxGuessedLetters.Text.Contains(letter)) //User guessed that letter.
-                    {
-                        char[] buffer = labelWord.Text.ToCharArray();
-                        buffer[index * 2] = word[index];
-                        labelWord.Text = new string(buffer);
-                        numOfLettersFound++;
-                    }
-                    index++;
-                }
 
-                if (!word.Contains(textBoxGuess.Text))
+                if (!word.Contains(textBoxGuess.Text)) //If the word does not contain the guess word...
                 {
                     picIndex++;
                     pictureBox1.Image = hangImg[picIndex];
                 }
+                else
+                {
+                    foreach (char letter in word)   //Make visible the guessed letters.
+                    {
+                        if (richTextBoxGuessedLetters.Text.Contains(letter)) //User guessed that letter.
+                        {
+                            char[] buffer = labelWord.Text.ToCharArray();
+                            buffer[index * 2] = word[index];
+                            labelWord.Text = new string(buffer);
+                            numOfLettersFound++;
+                        }
+                        index++;
+                    }
+                }
 
-                if (picIndex + 1 >= hangImg.Length || numOfLettersFound == word.Length) //Player exceeded the try limit || User found all the lettters.
+
+                if (picIndex + 1 >= hangImg.Length)//Player exceeded the try limit, lost.
+                {
                     textBoxGuess.Enabled = false;
+                    textBoxGuess.BackColor = Color.Red;
+                    textBoxGuess.ForeColor = Color.Red;
+                }
+                if (numOfLettersFound == word.Length) //User found all the lettters, won
+                {
+                    textBoxGuess.Enabled = false;
+                    textBoxGuess.BackColor = Color.GreenYellow;
+                    textBoxGuess.ForeColor = Color.GreenYellow;
+                }
+
+
 
 
 
@@ -93,6 +109,8 @@ namespace WFA_Hangman_EYE
 
 
             textBoxGuess.Enabled = true;
+            textBoxGuess.BackColor = SystemColors.Control;
+            textBoxGuess.ForeColor = SystemColors.ControlText;
         }
     }
 }
