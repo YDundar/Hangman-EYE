@@ -25,7 +25,7 @@ namespace WFA_Hangman_EYE
             InitializeComponent();
 
             word = WordPool.getRandomWord();
-            
+
             labelWord.Text = "";
 
             foreach (char letter in word)
@@ -33,6 +33,10 @@ namespace WFA_Hangman_EYE
 
             labelWord.Font = new System.Drawing.Font(labelWord.Font.Name, 16f);
             textBoxGuess.MaxLength = word.Length;
+
+
+
+
 
 
             pictureBox1.Image = hangImg[picIndex];
