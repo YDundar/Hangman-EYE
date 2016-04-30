@@ -28,16 +28,11 @@ namespace WFA_Hangman_EYE
 
             labelWord.Text = "";
 
-            foreach (char letter in word)
+            foreach (char letter in word) //Put underscores on the labelWord.
                 labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
 
             labelWord.Font = new System.Drawing.Font(labelWord.Font.Name, 16f);
             textBoxGuess.MaxLength = word.Length;
-
-
-
-
-
 
             pictureBox1.Image = hangImg[picIndex];
         }
@@ -52,7 +47,6 @@ namespace WFA_Hangman_EYE
                 foreach (char letter in textBoxGuess.Text)  //Guessed letter box
                     if (!richTextBoxGuessedLetters.Text.Contains(letter.ToString()))
                         richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, letter + " ");
-
 
                 int index = 0;
 
