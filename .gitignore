@@ -35,14 +35,10 @@ $RECYCLE.BIN/
 *.userprefs
 
 # Build results
-[Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
 x64/
 x86/
 bld/
-[Bb]in/Release
 [Oo]bj/
 [Ll]og/
 
