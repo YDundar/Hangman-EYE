@@ -45,14 +45,12 @@ namespace WFA_Hangman_EYE
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Enter && !isEnteredWord(textBoxGuess.Text))
-            {
-                richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n"); //Guessed word box
-
-                foreach (char letter in textBoxGuess.Text)  //Guessed letter box
-                    if (!richTextBoxGuessedLetters.Text.Contains(letter.ToString()))
-                        richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, letter + " ");
-
+            if (e.KeyCode == Keys.Enter && !isEnteredWord(textBoxGuess.Text)) //While the guess text box is in focus, 
+            {                                                                 //if the player presses enter and didn't enter that word before.
+                //Enter the new word to the guessed letters box.
+                richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n");
+                if (textBoxGuess.Text.Length == 1 && !richTextBoxGuessedLetters.Text.Contains(textBoxGuess.Text))
+                    richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, textBoxGuess.Text + "\n");
 
                 int index = 0;
 
