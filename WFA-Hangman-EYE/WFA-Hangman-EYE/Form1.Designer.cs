@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBoxGuessedLetters = new System.Windows.Forms.RichTextBox();
             this.labelShowOnLost = new System.Windows.Forms.Label();
+            this.buttonHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,11 +141,23 @@
             this.labelShowOnLost.TabIndex = 9;
             this.labelShowOnLost.Text = " ";
             // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHelp.Location = new System.Drawing.Point(433, 290);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonHelp.TabIndex = 10;
+            this.buttonHelp.Text = "?";
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 326);
+            this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.labelShowOnLost);
             this.Controls.Add(this.richTextBoxGuessedLetters);
             this.Controls.Add(this.label3);
@@ -177,6 +190,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox richTextBoxGuessedLetters;
         private System.Windows.Forms.Label labelShowOnLost;
+        private System.Windows.Forms.Button buttonHelp;
     }
 }
 

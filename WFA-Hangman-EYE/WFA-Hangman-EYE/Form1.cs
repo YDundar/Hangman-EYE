@@ -132,5 +132,10 @@ namespace WFA_Hangman_EYE
             textBoxGuess.BackColor = SystemColors.Control;     //Reset the back color of the guess text box
             textBoxGuess.ForeColor = SystemColors.ControlText; //Reset the fore color of the guess text box
         }
+
+        private void buttonHelp_Click(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Write letters in the Guess field and press enter to register.\nYou can guess parts of the word if you are sure.\nFor example, Word: Capitol Guess: pit\nYou can review the letters and words you've guessed on the right side.\nGood Luck!");
+        }
     }
 }
