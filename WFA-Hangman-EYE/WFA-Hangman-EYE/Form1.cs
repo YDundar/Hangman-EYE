@@ -54,7 +54,7 @@ namespace WFA_Hangman_EYE
                 //If the guess word is one letter && the player hasn't guess that letter before.
                 if (textBoxGuess.Text.Length == 1 && !richTextBoxGuessedLetters.Text.Contains(textBoxGuess.Text))
                     //Add the guessed letter to guessed letter box
-                    richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, textBoxGuess.Text + "\n");
+                    richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, textBoxGuess.Text + " ");
 
                 int index = 0;
 
