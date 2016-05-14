@@ -39,6 +39,7 @@
             this.richTextBoxGuessedLetters = new System.Windows.Forms.RichTextBox();
             this.labelShowOnLost = new System.Windows.Forms.Label();
             this.buttonHelp = new System.Windows.Forms.Button();
+            this.labelRevealLetter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,11 +153,23 @@
             this.buttonHelp.UseVisualStyleBackColor = true;
             this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
             // 
+            // labelRevealLetter
+            // 
+            this.labelRevealLetter.AutoSize = true;
+            this.labelRevealLetter.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRevealLetter.Location = new System.Drawing.Point(12, 236);
+            this.labelRevealLetter.Name = "labelRevealLetter";
+            this.labelRevealLetter.Size = new System.Drawing.Size(129, 16);
+            this.labelRevealLetter.TabIndex = 11;
+            this.labelRevealLetter.Text = "Click to reveal a letter!";
+            this.labelRevealLetter.Click += new System.EventHandler(this.labelRevealLetter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 326);
+            this.Controls.Add(this.labelRevealLetter);
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.labelShowOnLost);
             this.Controls.Add(this.richTextBoxGuessedLetters);
@@ -191,6 +204,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxGuessedLetters;
         private System.Windows.Forms.Label labelShowOnLost;
         private System.Windows.Forms.Button buttonHelp;
+        private System.Windows.Forms.Label labelRevealLetter;
     }
 }
 

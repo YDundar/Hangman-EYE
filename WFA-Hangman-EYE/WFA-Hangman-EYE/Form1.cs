@@ -6,6 +6,7 @@ namespace WFA_Hangman_EYE
     public partial class Form1 : Form
     {
         string word;
+
         Image[] hangImg = {
             WFA_Hangman_EYE.Properties.Resources.hangman_0,
             WFA_Hangman_EYE.Properties.Resources.hangman_1,
@@ -19,7 +20,7 @@ namespace WFA_Hangman_EYE
         };
 
         int picIndex = 0; //Failure tries.
-
+        bool clickedOnReveal = false; //Initialize the clickedOnReveal boolean.
         public Form1()
         {
             InitializeComponent();              //Start widgets.
@@ -35,6 +36,10 @@ namespace WFA_Hangman_EYE
             textBoxGuess.MaxLength = word.Length;   //Limit the input length in Guess Text Box 
 
             pictureBox1.Image = hangImg[picIndex];  //Set the hangman image.
+
+            if (word.Length < 5)                   //If the word is too short,
+                labelRevealLetter.Enabled = false; //disable the reveal a letter feature.
+
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -56,6 +61,9 @@ namespace WFA_Hangman_EYE
                 {
                     picIndex++;                            //Increment the failed tries int.
                     pictureBox1.Image = hangImg[picIndex]; //Change the hangman picture.
+
+                    if (picIndex == hangImg.Length - 2)    //Only one try left so,
+                        labelRevealLetter.Enabled = false; //Disable the label.
                 }
                 else
                 {
@@ -131,11 +139,47 @@ namespace WFA_Hangman_EYE
             textBoxGuess.Enabled = true;           //Enable the guess text box so player can guess 
             textBoxGuess.BackColor = SystemColors.Control;     //Reset the back color of the guess text box
             textBoxGuess.ForeColor = SystemColors.ControlText; //Reset the fore color of the guess text box
+
+            if (word.Length < 5)                   //If the word is too short,
+                labelRevealLetter.Enabled = false; //disable the reveal a letter feature.
+            else
+                labelRevealLetter.Enabled = true; //enable the feature if word is long enough.
+
+            clickedOnReveal = false;              //Reset the clickedOnReveal boolean.
         }
 
-        private void buttonHelp_Click(object sender, System.EventArgs e)
+        private void buttonHelp_Click(object sender, System.EventArgs e) //Click on help button.
         {
-            MessageBox.Show("Write letters in the Guess field and press enter to register.\nYou can guess parts of the word if you are sure.\nFor example, Word: Capitol Guess: pit\nYou can review the letters and words you've guessed on the right side.\nGood Luck!");
+            //Show the help message.
+            MessageBox.Show("Write letters in the Guess field and press enter to register.\n" +
+                "You can guess parts of the word if you are sure.\n" +
+                "For example, Word: Capitol Guess: pit\n" +
+                "You can review the letters and words you've guessed on the right side.\n" +
+                "You can reveal a letter once if the word is longer than 5 letters.\n" +
+                "Good Luck!");
+        }
+
+        private void labelRevealLetter_Click(object sender, System.EventArgs e) //Click on Reveal label.
+        {
+
+            System.Random r = new System.Random(); //Get a new Random object.
+            if (!clickedOnReveal && labelWord.Text.Contains('_'))//If the user didn't click on the label before and there is a letter to reveal.
+            {
+                clickedOnReveal = true;                         //Change the boolean to true/clicked.
+                int randomIndex = r.Next(word.Length);          //Get a random int between 0 and word's length.
+                while (labelWord.Text[randomIndex * 2] != '_')  //Get a random int until we find an underscore.
+                    randomIndex = r.Next(word.Length);
+
+
+                char[] buffer = labelWord.Text.ToCharArray();  //Buffer is needed to change the char at an index.
+                buffer[randomIndex * 2] = word[randomIndex];
+                labelWord.Text = new string(buffer);           //Change the labelWord's text / Reveal a letter.
+
+                picIndex++;                            //Increment the failed tries int.
+                pictureBox1.Image = hangImg[picIndex]; //Change the hangman picture.
+
+                labelRevealLetter.Enabled = false;             //Disable the label.
+            }
         }
     }
 }
