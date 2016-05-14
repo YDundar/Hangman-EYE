@@ -139,15 +139,5 @@ namespace WFA_Hangman_EYE.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap hangman_8 {
-            get {
-                object obj = ResourceManager.GetObject("hangman_8", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

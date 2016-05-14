@@ -14,9 +14,8 @@ namespace WFA_Hangman_EYE
             WFA_Hangman_EYE.Properties.Resources.hangman_3 ,
             WFA_Hangman_EYE.Properties.Resources.hangman_4 ,
             WFA_Hangman_EYE.Properties.Resources.hangman_5 ,
-            WFA_Hangman_EYE.Properties.Resources.hangman_6 ,
-            WFA_Hangman_EYE.Properties.Resources.hangman_7 ,
-            WFA_Hangman_EYE.Properties.Resources.hangman_8
+            WFA_Hangman_EYE.Properties.Resources.hangman_6,
+            WFA_Hangman_EYE.Properties.Resources.hangman_7
         };
 
         int picIndex = 0; //Failure tries.
@@ -24,6 +23,8 @@ namespace WFA_Hangman_EYE
         public Form1()
         {
             InitializeComponent();              //Start widgets.
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             word = WordPool.getRandomWord();    //Get a random word from the pool.
 

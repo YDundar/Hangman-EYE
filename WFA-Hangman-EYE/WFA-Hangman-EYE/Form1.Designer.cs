@@ -48,7 +48,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(362, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 220);
+            this.pictureBox1.Size = new System.Drawing.Size(99, 220);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -68,7 +68,7 @@
             this.buttonNewGame.Location = new System.Drawing.Point(138, 291);
             this.buttonNewGame.Name = "buttonNewGame";
             this.buttonNewGame.Size = new System.Drawing.Size(131, 23);
-            this.buttonNewGame.TabIndex = 2;
+            this.buttonNewGame.TabIndex = 4;
             this.buttonNewGame.Text = "Start a New Game";
             this.buttonNewGame.UseVisualStyleBackColor = true;
             this.buttonNewGame.Click += new System.EventHandler(this.buttonNewGame_Click);
