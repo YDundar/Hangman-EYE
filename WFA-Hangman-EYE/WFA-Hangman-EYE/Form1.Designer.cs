@@ -38,6 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBoxGuessedLetters = new System.Windows.Forms.RichTextBox();
             this.labelShowOnLost = new System.Windows.Forms.Label();
+            this.buttonHelp = new System.Windows.Forms.Button();
+            this.labelRevealLetter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +48,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(362, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 220);
+            this.pictureBox1.Size = new System.Drawing.Size(99, 220);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -66,7 +68,7 @@
             this.buttonNewGame.Location = new System.Drawing.Point(138, 291);
             this.buttonNewGame.Name = "buttonNewGame";
             this.buttonNewGame.Size = new System.Drawing.Size(131, 23);
-            this.buttonNewGame.TabIndex = 2;
+            this.buttonNewGame.TabIndex = 4;
             this.buttonNewGame.Text = "Start a New Game";
             this.buttonNewGame.UseVisualStyleBackColor = true;
             this.buttonNewGame.Click += new System.EventHandler(this.buttonNewGame_Click);
@@ -140,11 +142,35 @@
             this.labelShowOnLost.TabIndex = 9;
             this.labelShowOnLost.Text = " ";
             // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHelp.Location = new System.Drawing.Point(433, 290);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonHelp.TabIndex = 10;
+            this.buttonHelp.Text = "?";
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            // 
+            // labelRevealLetter
+            // 
+            this.labelRevealLetter.AutoSize = true;
+            this.labelRevealLetter.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRevealLetter.Location = new System.Drawing.Point(12, 236);
+            this.labelRevealLetter.Name = "labelRevealLetter";
+            this.labelRevealLetter.Size = new System.Drawing.Size(129, 16);
+            this.labelRevealLetter.TabIndex = 11;
+            this.labelRevealLetter.Text = "Click to reveal a letter!";
+            this.labelRevealLetter.Click += new System.EventHandler(this.labelRevealLetter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 326);
+            this.Controls.Add(this.labelRevealLetter);
+            this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.labelShowOnLost);
             this.Controls.Add(this.richTextBoxGuessedLetters);
             this.Controls.Add(this.label3);
@@ -177,6 +203,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox richTextBoxGuessedLetters;
         private System.Windows.Forms.Label labelShowOnLost;
+        private System.Windows.Forms.Button buttonHelp;
+        private System.Windows.Forms.Label labelRevealLetter;
     }
 }
 

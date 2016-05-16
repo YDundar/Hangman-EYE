@@ -9,8 +9,8 @@ namespace WFA_Hangman_EYE
         /// <returns></returns>
         public static string getRandomWord()
         {
-            Random rnd = new Random();
-            return words[rnd.Next(words.Length)];
+            Random rnd = new Random();            //Initialize random number generator.
+            return words[rnd.Next(words.Length)]; //Get a number between 0 and number of words in word pool.
         }
         /// <summary>
         /// Word Pool.
