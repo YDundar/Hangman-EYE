@@ -1,11 +1,45 @@
-﻿using System.Drawing;
+﻿using System.Configuration;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NUnit.Framework; //NUnit Framework
+
 namespace WFA_Hangman_EYE
 {
+    [TestFixture]
     public partial class Form1 : Form
     {
         string word;
+
+        [Test]
+        public void testForRevealLetterHint() //Testing if the Reveal Letter Hint enables and disables correctly
+        {
+            Form1 dummyForm = new Form1();
+            if (dummyForm.word.Length < 5)
+            {
+                Assert.IsTrue(!dummyForm.labelRevealLetter.Enabled);
+            }
+            else
+            {
+                Assert.IsTrue(dummyForm.labelRevealLetter.Enabled);
+            }
+        }
+        [Test]
+        public void testMaxLength() //Testing if the maxLength gets set correctly or not
+        {
+            Form1 dummyForm1 = new Form1();
+            Assert.AreEqual(dummyForm1.textBoxGuess.MaxLength,dummyForm1.word.Length);
+        }
+
+        [Test]
+        public void testForGuessedWords() //Testing if the Entered Text is added to the Guessed Letter List or not
+        {
+            Form1 dummyForm1=new Form1();
+            KeyEventArgs e= new KeyEventArgs(Keys.Enter);
+            dummyForm1.textBoxGuess.Text = "abc";
+            dummyForm1.textBox1_KeyDown(new object(),e);
+            Assert.IsTrue(dummyForm1.richTextBoxGuessedLetters.Text.Contains(dummyForm1.textBoxGuess.Text));
+        }
 
         Image[] hangImg = {
             WFA_Hangman_EYE.Properties.Resources.hangman_0,
@@ -14,36 +48,23 @@ namespace WFA_Hangman_EYE
             WFA_Hangman_EYE.Properties.Resources.hangman_3 ,
             WFA_Hangman_EYE.Properties.Resources.hangman_4 ,
             WFA_Hangman_EYE.Properties.Resources.hangman_5 ,
-            WFA_Hangman_EYE.Properties.Resources.hangman_6 ,
-            WFA_Hangman_EYE.Properties.Resources.hangman_7 ,
-            WFA_Hangman_EYE.Properties.Resources.hangman_8
             WFA_Hangman_EYE.Properties.Resources.hangman_6,
             WFA_Hangman_EYE.Properties.Resources.hangman_7
         };
 
-        int picIndex = 0;
-
         int picIndex = 0; //Failure tries.
         bool clickedOnReveal = false; //Initialize the clickedOnReveal boolean.
+
         public Form1()
         {
-            InitializeComponent();
             InitializeComponent();              //Start widgets.
 
-            word = WordPool.getRandomWord();
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            labelWord.Text = "";
-
-            foreach (char letter in word) //Put underscores on the labelWord.
-                labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");
             word = WordPool.getRandomWord();    //Get a random word from the pool.
 
-            labelWord.Font = new System.Drawing.Font(labelWord.Font.Name, 16f);
-            textBoxGuess.MaxLength = word.Length;
             labelWord.Text = "";                //Reset the word label.
 
-            pictureBox1.Image = hangImg[picIndex];
             foreach (char letter in word)                                           //For each letter of the word,
                 labelWord.Text = labelWord.Text.Insert(labelWord.Text.Length, "_ ");//Insert an underscore.
 
@@ -56,7 +77,6 @@ namespace WFA_Hangman_EYE
                 labelRevealLetter.Enabled = false; //disable the reveal a letter feature.
 
         }
-
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -65,7 +85,7 @@ namespace WFA_Hangman_EYE
                 //Enter the new word to the guessed letters box.
                 richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n");
 
-                //If the guess word is one letter && the player hasn't guess that letter before.
+                //If the guess word is one letter && the player hasn't guessed that letter before.
                 if (textBoxGuess.Text.Length == 1 && !richTextBoxGuessedLetters.Text.Contains(textBoxGuess.Text))
                     //Add the guessed letter to guessed letter box
                     richTextBoxGuessedLetters.Text = richTextBoxGuessedLetters.Text.Insert(richTextBoxGuessedLetters.Text.Length, textBoxGuess.Text + " ");
