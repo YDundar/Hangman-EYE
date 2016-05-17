@@ -11,6 +11,8 @@ namespace WFA_Hangman_EYE
     {
         string word;
 
+        #region Test Cases
+
         [Test]
         public void testForRevealLetterHint() //Testing if the Reveal Letter Hint enables and disables correctly
         {
@@ -40,6 +42,75 @@ namespace WFA_Hangman_EYE
             dummyForm1.textBox1_KeyDown(new object(),e);
             Assert.IsTrue(dummyForm1.richTextBoxGuessedLetters.Text.Contains(dummyForm1.textBoxGuess.Text));
         }
+
+        [Test]
+        public void testPicIndex() //Testing if the picIndex sets correctly after correct/incorrect guess attempts
+        {
+            Form1 dummyForm1 =new Form1();
+            KeyEventArgs e=new KeyEventArgs(Keys.Enter);
+            dummyForm1.word = "abcd";
+            int initialPicIndex = dummyForm1.picIndex;
+
+            dummyForm1.textBoxGuess.Text = "a"; // A Correct attempt
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(initialPicIndex,dummyForm1.picIndex);
+            initialPicIndex = dummyForm1.picIndex;
+            dummyForm1.textBoxGuess.Text = "e"; // A failed attempt
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(initialPicIndex+1, dummyForm1.picIndex);
+        }
+
+        [Test]
+        public void testForGameLost() //Testing if the game lost event is triggered correctly or not
+        {
+            Form1 dummyForm1 = new Form1();
+            KeyEventArgs e = new KeyEventArgs(Keys.Enter);
+            dummyForm1.word = "test";
+            dummyForm1.textBoxGuess.Text = "a";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = "b";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = "c";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = "d";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = "f";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = "g";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = "h";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(Color.Red,dummyForm1.textBoxGuess.BackColor);
+            Assert.AreEqual(Color.Red,dummyForm1.textBoxGuess.ForeColor);
+        }
+
+        [Test]
+        public void testForGameWon() //Testing if the game won event is triggered correctly or not
+        {
+            Form1 dummyForm1 = new Form1();
+            KeyEventArgs e = new KeyEventArgs(Keys.Enter);
+            dummyForm1.textBoxGuess.Text = dummyForm1.word; //Correct attempt
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(Color.GreenYellow, dummyForm1.textBoxGuess.BackColor);
+            Assert.AreEqual(Color.GreenYellow, dummyForm1.textBoxGuess.ForeColor);
+        }
+
+        [Test]
+        public void testForSameLetterGuess() //Testing if the same letter guess increases the picIndex or not.
+        {
+            Form1 dummyForm1=new Form1();
+            KeyEventArgs e=new KeyEventArgs(Keys.Enter);
+            
+            dummyForm1.word = "test";
+            dummyForm1.textBoxGuess.Text = "a";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            int attemptIndex = dummyForm1.picIndex;
+            dummyForm1.textBoxGuess.Text = "a";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(attemptIndex,dummyForm1.picIndex);
+        }
+
+        #endregion Test Cases
 
         Image[] hangImg = {
             WFA_Hangman_EYE.Properties.Resources.hangman_0,
