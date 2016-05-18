@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -110,6 +111,34 @@ namespace WFA_Hangman_EYE
             Assert.AreEqual(attemptIndex,dummyForm1.picIndex);
         }
 
+        [Test]
+        public void testForPartialWordGuess() //Testing if parts of the hidden word will count as correct guesses.
+        {
+            Form1 dummyForm1=new Form1();
+            KeyEventArgs e=new KeyEventArgs(Keys.Enter);
+            dummyForm1.textBoxGuess.Text =dummyForm1.word.Substring(2,3);
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text =dummyForm1.word.Substring(0,2);
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            dummyForm1.textBoxGuess.Text = dummyForm1.word.Substring(3);
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(Color.GreenYellow, dummyForm1.textBoxGuess.BackColor);
+
+        }
+
+        [Test]
+        public void testPicIndexAfterPartialWordGuess() //Testing if the picIndex sets correctly after an incorrect partial word guess.
+        {
+            Form1 dummyForm1 = new Form1();
+            KeyEventArgs e = new KeyEventArgs(Keys.Enter);
+            int initialPicIndex = dummyForm1.picIndex;
+            dummyForm1.word = "test";
+            dummyForm1.textBoxGuess.MaxLength = 4;
+            dummyForm1.textBoxGuess.Text = "abc";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(initialPicIndex+1, dummyForm1.picIndex);
+        }
+        
         #endregion Test Cases
 
         Image[] hangImg = {
@@ -143,7 +172,6 @@ namespace WFA_Hangman_EYE
             textBoxGuess.MaxLength = word.Length;   //Limit the input length in Guess Text Box 
 
             pictureBox1.Image = hangImg[picIndex];  //Set the hangman image.
-
             if (word.Length < 5)                   //If the word is too short,
                 labelRevealLetter.Enabled = false; //disable the reveal a letter feature.
 
