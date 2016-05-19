@@ -27,6 +27,7 @@ namespace WFA_Hangman_EYE
                 Assert.IsTrue(dummyForm.labelRevealLetter.Enabled);
             }
         }
+
         [Test]
         public void testMaxLength() //Testing if the maxLength gets set correctly or not
         {
@@ -39,9 +40,10 @@ namespace WFA_Hangman_EYE
         {
             Form1 dummyForm1=new Form1();
             KeyEventArgs e= new KeyEventArgs(Keys.Enter);
-            dummyForm1.textBoxGuess.Text = "abc";
+            dummyForm1.textBoxGuess.Text = "a";
             dummyForm1.textBox1_KeyDown(new object(),e);
             Assert.IsTrue(dummyForm1.richTextBoxGuessedLetters.Text.Contains(dummyForm1.textBoxGuess.Text));
+            Assert.IsTrue(dummyForm1.isEnteredWord(dummyForm1.textBoxGuess.Text));
         }
 
         [Test]
@@ -67,6 +69,7 @@ namespace WFA_Hangman_EYE
             Form1 dummyForm1 = new Form1();
             KeyEventArgs e = new KeyEventArgs(Keys.Enter);
             dummyForm1.word = "test";
+            dummyForm1.textBoxGuess.MaxLength = dummyForm1.word.Length;
             dummyForm1.textBoxGuess.Text = "a";
             dummyForm1.textBox1_KeyDown(new object(), e);
             dummyForm1.textBoxGuess.Text = "b";
@@ -81,6 +84,7 @@ namespace WFA_Hangman_EYE
             dummyForm1.textBox1_KeyDown(new object(), e);
             dummyForm1.textBoxGuess.Text = "h";
             dummyForm1.textBox1_KeyDown(new object(), e);
+            int tempPicIndex = dummyForm1.picIndex;
             Assert.AreEqual(Color.Red,dummyForm1.textBoxGuess.BackColor);
             Assert.AreEqual(Color.Red,dummyForm1.textBoxGuess.ForeColor);
         }
@@ -103,12 +107,18 @@ namespace WFA_Hangman_EYE
             KeyEventArgs e=new KeyEventArgs(Keys.Enter);
             
             dummyForm1.word = "test";
-            dummyForm1.textBoxGuess.Text = "a";
+            dummyForm1.textBoxGuess.Text = "a"; //Same letter guesses
             dummyForm1.textBox1_KeyDown(new object(), e);
             int attemptIndex = dummyForm1.picIndex;
             dummyForm1.textBoxGuess.Text = "a";
             dummyForm1.textBox1_KeyDown(new object(), e);
             Assert.AreEqual(attemptIndex,dummyForm1.picIndex);
+            dummyForm1.textBoxGuess.Text = "abc"; //Same word guesses
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            attemptIndex = dummyForm1.picIndex;
+            dummyForm1.textBoxGuess.Text = "abc";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(attemptIndex, dummyForm1.picIndex);
         }
 
         [Test]
@@ -127,18 +137,54 @@ namespace WFA_Hangman_EYE
         }
 
         [Test]
-        public void testPicIndexAfterPartialWordGuess() //Testing if the picIndex sets correctly after an incorrect partial word guess.
+        public void testPicIndexAfterPartialWordGuess() //Testing if the picIndex sets correctly after a correct/incorrect partial word guesses.
         {
             Form1 dummyForm1 = new Form1();
             KeyEventArgs e = new KeyEventArgs(Keys.Enter);
             int initialPicIndex = dummyForm1.picIndex;
             dummyForm1.word = "test";
             dummyForm1.textBoxGuess.MaxLength = 4;
-            dummyForm1.textBoxGuess.Text = "abc";
+            dummyForm1.textBoxGuess.Text = "abc"; //Incorrect guess
             dummyForm1.textBox1_KeyDown(new object(), e);
             Assert.AreEqual(initialPicIndex+1, dummyForm1.picIndex);
+            initialPicIndex = dummyForm1.picIndex;
+            dummyForm1.textBoxGuess.Text = "tes"; //Correct guess
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreEqual(initialPicIndex, dummyForm1.picIndex);
         }
-        
+
+        [Test]
+        public void testForLargerThanMaxLengthGuess() // Testing if the larger than maxLength guess registers or not.
+        {
+            Form1 dummyForm1=new Form1();
+            KeyEventArgs e=new KeyEventArgs(Keys.Enter);
+            dummyForm1.word = "test";
+            dummyForm1.textBoxGuess.MaxLength = dummyForm1.word.Length;
+            dummyForm1.textBoxGuess.Text = "abcde";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.AreNotEqual(1,picIndex);
+        }
+
+        [Test]
+        public void testGetRandomWord() //Testing if getRandomWord will return a new word
+        {
+            Form1 dummyForm1 =new Form1();
+            string initialWord = dummyForm1.word;
+            System.Threading.Thread.Sleep(1000);
+            dummyForm1.word=WordPool.getRandomWord();
+            Assert.AreNotEqual(initialWord,dummyForm1.word);
+        }
+
+        [Test]
+        public void testNumericalInputs() //Testing if numerical inputs are registered by the system correctly or not
+        {
+            Form1 dummyForm1 = new Form1();
+            KeyEventArgs e=new KeyEventArgs(Keys.Enter);
+            dummyForm1.textBoxGuess.Text = "231";
+            dummyForm1.textBox1_KeyDown(new object(), e);
+            Assert.IsTrue(!dummyForm1.isEnteredWord("231"));
+        }
+
         #endregion Test Cases
 
         Image[] hangImg = {
