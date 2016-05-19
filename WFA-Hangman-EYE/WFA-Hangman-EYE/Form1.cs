@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -180,9 +181,9 @@ namespace WFA_Hangman_EYE
         {
             Form1 dummyForm1 = new Form1();
             KeyEventArgs e=new KeyEventArgs(Keys.Enter);
-            dummyForm1.textBoxGuess.Text = "231";
+            dummyForm1.textBoxGuess.Text = "2!3";
             dummyForm1.textBox1_KeyDown(new object(), e);
-            Assert.IsTrue(!dummyForm1.isEnteredWord("231"));
+            Assert.IsTrue(!dummyForm1.isEnteredWord("2!3"));
         }
 
         #endregion Test Cases
@@ -225,7 +226,7 @@ namespace WFA_Hangman_EYE
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Enter && !isEnteredWord(textBoxGuess.Text)) //While the guess text box is in focus, 
+            if (e.KeyCode == Keys.Enter && !isEnteredWord(textBoxGuess.Text) && doesContainAllLetters(textBoxGuess.Text)) //While the guess text box is in focus, 
             {                                                                 //if the player presses enter and didn't enter that word before.
                 //Enter the new word to the guessed letters box.
                 richTextBoxGuessedWords.Text = richTextBoxGuessedWords.Text.Insert(richTextBoxGuessedWords.Text.Length, textBoxGuess.Text + "\n");
@@ -296,6 +297,17 @@ namespace WFA_Hangman_EYE
 
             return false;
         }
+
+        /// <summary>
+        /// Checks whether the guessed word contains only letters or not
+        /// </summary>
+        /// <param name="_guessWord"></param>
+        /// <returns>Returns true if the word contains all letters</returns>
+        private bool doesContainAllLetters(string _guessWord)
+        {
+            return _guessWord.All(Char.IsLetter);
+        }
+
         /// <summary>
         /// Resets the necessary widgets so a new game can be started.
         /// </summary>
