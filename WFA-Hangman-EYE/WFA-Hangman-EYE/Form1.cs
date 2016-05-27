@@ -127,11 +127,11 @@ namespace WFA_Hangman_EYE
         {
             Form1 dummyForm1=new Form1();
             KeyEventArgs e=new KeyEventArgs(Keys.Enter);
-            dummyForm1.textBoxGuess.Text =dummyForm1.word.Substring(2,3);
+            dummyForm1.textBoxGuess.Text =dummyForm1.word.Substring(1,2);
             dummyForm1.textBox1_KeyDown(new object(), e);
-            dummyForm1.textBoxGuess.Text =dummyForm1.word.Substring(0,2);
+            dummyForm1.textBoxGuess.Text =dummyForm1.word.Substring(0,1);
             dummyForm1.textBox1_KeyDown(new object(), e);
-            dummyForm1.textBoxGuess.Text = dummyForm1.word.Substring(3);
+            dummyForm1.textBoxGuess.Text = dummyForm1.word.Substring(2);
             dummyForm1.textBox1_KeyDown(new object(), e);
             Assert.AreEqual(Color.GreenYellow, dummyForm1.textBoxGuess.BackColor);
 
@@ -143,13 +143,13 @@ namespace WFA_Hangman_EYE
             Form1 dummyForm1 = new Form1();
             KeyEventArgs e = new KeyEventArgs(Keys.Enter);
             int initialPicIndex = dummyForm1.picIndex;
-            dummyForm1.word = "test";
+            dummyForm1.word = "abc";
             dummyForm1.textBoxGuess.MaxLength = 4;
-            dummyForm1.textBoxGuess.Text = "abc"; //Incorrect guess
+            dummyForm1.textBoxGuess.Text = "ed"; //Incorrect guess
             dummyForm1.textBox1_KeyDown(new object(), e);
             Assert.AreEqual(initialPicIndex+1, dummyForm1.picIndex);
             initialPicIndex = dummyForm1.picIndex;
-            dummyForm1.textBoxGuess.Text = "tes"; //Correct guess
+            dummyForm1.textBoxGuess.Text = "ab"; //Correct guess
             dummyForm1.textBox1_KeyDown(new object(), e);
             Assert.AreEqual(initialPicIndex, dummyForm1.picIndex);
         }
@@ -177,7 +177,7 @@ namespace WFA_Hangman_EYE
         }
 
         [Test]
-        public void testNumericalInputs() //Testing if numerical inputs are registered by the system correctly or not
+        public void testNonLetterInputs() //Testing if non-letter inputs are registered by the system correctly or not
         {
             Form1 dummyForm1 = new Form1();
             KeyEventArgs e=new KeyEventArgs(Keys.Enter);
